@@ -1,5 +1,9 @@
 import admissionImage from '../assets/admission.png';
 import directorImage from '../assets/director.png';
+import hof1 from '../assets/Hof1.png';
+import hof2 from '../assets/Hof2.png';
+import hof3 from '../assets/Hof3.png';
+import hof4 from '../assets/Hof4.png';
 
 export const IMAGES = {
   logo: "image_f6a565.png",
@@ -15,13 +19,9 @@ export const IMAGES = {
   // admission: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=1000", // Fallback
   
   results: [
-    "image_f6a5e5.jpg",
-    "image_f6a5c1.jpg",
-    "image_f6a5c8.jpg",
-    "image_f6a5a2.jpg"
-    // "https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?auto=format&fit=crop&q=80&w=800",
-    // "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=800",
-    // "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=800",
-    // "https://images.unsplash.com/photo-1427504746696-ea5abd7dfe4d?auto=format&fit=crop&q=80&w=800"
+    hof1,
+    hof2,
+    hof3,
+    hof4
   ]
 };
