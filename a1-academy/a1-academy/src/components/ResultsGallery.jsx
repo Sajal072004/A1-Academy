@@ -1,8 +1,48 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Award } from 'lucide-react';
 import { IMAGES } from '../config/images';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const ResultsGallery = () => {
+  const cardsRef = useRef([]);
+
+  useEffect(() => {
+    // Filter out null refs
+    const validCards = cardsRef.current.filter(card => card !== null);
+    
+    if (validCards.length === 0) return;
+
+    // Animate cards from bottom with stagger effect
+    gsap.fromTo(
+      validCards,
+      {
+        y: 150,
+        opacity: 0,
+        scale: 0.9,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 1,
+        stagger: 0.15,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '#results',
+          start: 'top 70%',
+          toggleActions: 'play none none none',
+        },
+      }
+    );
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, [IMAGES.results.length]);
+
   return (
     <div id="results" className="py-24 bg-blue-900 text-white relative overflow-hidden">
       {/* Background decoration */}
@@ -18,17 +58,21 @@ const ResultsGallery = () => {
           </p>
         </div>
 
-        {/* Masonry-style Grid for Result Images */}
+        {/* Grid for Result Images - 2 per row */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {IMAGES.results.map((imgSrc, index) => (
-            <div key={index} className="group relative rounded-xl overflow-hidden shadow-2xl bg-white transform transition duration-500 hover:scale-[1.02]">
+            <div 
+              key={index} 
+              ref={(el) => (cardsRef.current[index] = el)}
+              className="group relative rounded-xl overflow-hidden shadow-2xl bg-white transform transition duration-500 hover:scale-[1.02]"
+            >
               <img 
                 src={imgSrc} 
                 alt={`Student Results ${index + 1}`} 
                 className="w-full h-auto object-contain"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+              <div className="absolute inset-0 bg-linear-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                 <span className="text-white font-bold bg-blue-600 px-3 py-1 rounded-lg text-sm">Outstanding Performance</span>
               </div>
             </div>
