@@ -1,8 +1,43 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { CheckCircle, MessageCircle } from 'lucide-react';
 import { IMAGES } from '../config/images';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const AdmissionSection = () => {
+  const imageRef = useRef(null);
+
+  useEffect(() => {
+    if (!imageRef.current) return;
+
+    gsap.fromTo(
+      imageRef.current,
+      {
+        x: -200,
+        opacity: 0,
+        rotation: -5,
+      },
+      {
+        x: 0,
+        opacity: 1,
+        rotation: 0,
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '#admissions',
+          start: 'top 75%',
+          toggleActions: 'play none none none',
+        },
+      }
+    );
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
+
   return (
     <div id="admissions" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -10,9 +45,10 @@ const AdmissionSection = () => {
           <div className="flex flex-col lg:flex-row gap-12 items-center">
             <div className="lg:w-1/2 w-full">
                <img 
+                ref={imageRef}
                  src={IMAGES.admission} 
                  alt="Admission Open 2025" 
-                 className="w-full h-auto rounded-xl shadow-lg transform rotate-1 hover:rotate-0 transition-all duration-300"
+                className="w-full h-auto rounded-xl shadow-lg transform hover:rotate-2 hover:scale-105 transition-all duration-300"
                />
             </div>
             <div className="lg:w-1/2 w-full space-y-6">
