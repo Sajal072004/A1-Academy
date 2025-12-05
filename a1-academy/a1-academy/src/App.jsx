@@ -20,6 +20,7 @@ import {
   Users
 } from 'lucide-react';
 import admissionImage from './assets/admission.png';
+import directorImage from './assets/director.png';
 
 // --- Image Assets Configuration ---
 // These are configured to look for files in your 'public' folder or 'src/assets'
@@ -33,7 +34,7 @@ const IMAGES = {
   classroom: "image_f6a585.jpg",
   // classroom: "https://images.unsplash.com/photo-1577896334614-201b31d50dc5?auto=format&fit=crop&q=80&w=1920", // Fallback
   
-  director: "image_f6a8ce.jpg",
+  director: directorImage,
   // director: "https://images.unsplash.com/photo-1524178232363-1fb2b075b955?auto=format&fit=crop&q=80&w=1000", // Fallback
   
   admission: admissionImage,
