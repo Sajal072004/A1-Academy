@@ -78,7 +78,7 @@ const Footer = () => {
         
         <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
           <p>&copy; {new Date().getFullYear()} A1 Academy. All rights reserved.</p>
-          <p className="mt-2 md:mt-0">Designed with ❤️ for Education</p>
+          <p className="mt-2 md:mt-0">Designed by Sahil Mandre with ❤️ for A1 Academy</p>
         </div>
       </div>
     </footer>
